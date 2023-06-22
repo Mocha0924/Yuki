@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8689689446546309772}
   - component: {fileID: 6649393516160310489}
   - component: {fileID: 9120813345345864474}
-  - component: {fileID: 1253637903461980107}
   m_Layer: 0
   m_Name: snow
   m_TagString: Untagged
@@ -31,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 7350978607019961498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -151,22 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28d531faefaaa94ab36ac40f688879e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  add_power: 0
---- !u!255 &1253637903461980107
-FixedJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7350978607019961498}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_DampingRatio: 0
-  m_Frequency: 0
+  _manager: {fileID: 0}
+  add_power: 0.0020592492

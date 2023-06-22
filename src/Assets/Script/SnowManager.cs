@@ -16,7 +16,7 @@ public class SnowManager : MonoBehaviour
         StartCoroutine(add_change());
         save_Time = Time;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (Time <= 0)
         {
@@ -30,7 +30,7 @@ public class SnowManager : MonoBehaviour
     {
 
         yield return new WaitForSeconds(5);
-        addX = Random.Range(-0.3f, 0.4f);
+        addX = Random.Range(-0.3f, 0.3f);
         StartCoroutine(add_change());
     }
     private void Star_Marker(GameObject Star)

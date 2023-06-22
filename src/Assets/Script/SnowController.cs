@@ -6,14 +6,15 @@ public class SnowController : MonoBehaviour
 {
     DestroyController _destrohcontroller;
     SnowMoveController moveController;
+    [SerializeField] private SnowManager _manager;
     SpriteRenderer Star_Renderer;
     Rigidbody2D rb;
     private bool Destroy_Check = false;
     private bool Move_Check = true;
+    private bool touchCheck = false;
     public float add_power;
     private GameObject Player;
-    [SerializeField]private GameObject player_main;
-    private FixedJoint2D joint;
+    //[SerializeField]private GameObject player_main;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,7 @@ public class SnowController : MonoBehaviour
         Star_Renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.Find("Player");
-        player_main = Player.transform.Find("Main").gameObject;
-        joint = GetComponent<FixedJoint2D>();
-        joint.enabled = false;
+      //  player_main = Player.transform.Find("Main").gameObject;
     }
 
     // Update is called once per frame
@@ -38,19 +37,29 @@ public class SnowController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Move_Check = false;
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "ground"||
+            collision.gameObject.tag == "foundation"||
+            gameObject.transform.position.y < -3)
         {
             Destroy_Check = true;
+            this.transform.parent = null;
+  
+            if(touchCheck)
+            {
+                touchCheck = false;
+            }
 
         }
         else if (collision.gameObject.tag == "Player"||
-                 collision.gameObject.tag == "playerPlayer")
+                 collision.gameObject.tag == "playerSnow"&&
+                 gameObject.transform.position.y >= -3)
         {
-            //gameObject.transform.SetParent(Player.transform);
             gameObject.tag = ("playerSnow");
-            joint.enabled = true;
-            joint.connectedBody = player_main.gameObject.GetComponent<Rigidbody2D>();
+            this.transform.parent = Player.transform;
+            touchCheck = true;
+           
         }
-       
+        
     }
+   
 }

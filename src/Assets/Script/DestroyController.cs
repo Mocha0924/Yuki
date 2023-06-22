@@ -18,6 +18,6 @@ public class DestroyController : MonoBehaviour
             return;
         }
         mr.material.color -=  new Color32(0,0,0,color_delete);
-        color_delete_level += 1;
+        color_delete_level += color_delete;
     }
 }
