@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnowController : MonoBehaviour
@@ -11,7 +12,6 @@ public class SnowController : MonoBehaviour
     Rigidbody2D rb;
     private bool Destroy_Check = false;
     private bool Move_Check = true;
-    private bool touchCheck = false;
     public float add_power;
     private GameObject Player;
     //[SerializeField]private GameObject player_main;
@@ -43,11 +43,8 @@ public class SnowController : MonoBehaviour
         {
             Destroy_Check = true;
             this.transform.parent = null;
+            this.gameObject.layer = 7;
   
-            if(touchCheck)
-            {
-                touchCheck = false;
-            }
 
         }
         else if (collision.gameObject.tag == "Player"||
@@ -56,7 +53,6 @@ public class SnowController : MonoBehaviour
         {
             gameObject.tag = ("playerSnow");
             this.transform.parent = Player.transform;
-            touchCheck = true;
            
         }
         
