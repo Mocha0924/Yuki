@@ -7,14 +7,14 @@ public class DestroyController : MonoBehaviour
     // Start is called before the first frame update
     // Update is called once per frame
     SpriteRenderer Star_Renderer;
-    const int color_delete = 1;
+    const int color_delete = 3;
     public int color_delete_level = 0;
     const int max_color_delete_level = 255;
-    public void Star_Destroy(SpriteRenderer mr,GameObject Star)
+    public void Snow_Destroy(SpriteRenderer mr,GameObject Snow)
     {
         if(color_delete_level >= max_color_delete_level)
         {
-            Destroy(Star);
+            Destroy(Snow);
             return;
         }
         mr.material.color -=  new Color32(0,0,0,color_delete);

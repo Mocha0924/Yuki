@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SnowManager : MonoBehaviour
 {
@@ -15,8 +15,11 @@ public class SnowManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI time_text;
     [SerializeField] private GameObject score_Panel;
     [SerializeField] private TextMeshProUGUI score_text;
+    [SerializeField] private TextMeshProUGUI evalation_text;
     [SerializeField] private TextMeshProUGUI Start_Time_text;
     [SerializeField] private GameObject player;
+    [SerializeField] private Image evalation_image;
+    [SerializeField] private Sprite[] evalation_sprite = new Sprite[4]; 
     private int score;
     private enum GAME_SCENE
     {
@@ -45,15 +48,22 @@ public class SnowManager : MonoBehaviour
                 Time = 0.0f;
             }
             time_text.text = Time.ToString("F0");
-            if (Time <= 0.0f)
+            if (Time <= 0.0f&&scene == GAME_SCENE.play)
             {
                 scene = GAME_SCENE.finish;
                 score = ScoreCheck(player);
                 score_Panel.SetActive(true);
-                score_text.text = score.ToString();
+                score_text.text = "~" + score.ToString("D3");
+                evalation_text.text = Score_TextCheck(score);
+                StartCoroutine(Ranking());
             }
         }
       
+    }
+    private IEnumerator Ranking()
+    {
+        yield return new WaitForSeconds(3);
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(score);
     }
     private int ScoreCheck(GameObject player)
     {
@@ -65,7 +75,7 @@ public class SnowManager : MonoBehaviour
     {
 
         yield return new WaitForSeconds(5);
-        addX = Random.Range(-0.3f, 0.3f);
+        addX = Random.Range(-1.0f, 1.0f);
         Star.GetComponent<SnowController>().add_power = addX;
         snow_quantity+=0.5f;
         StartCoroutine(add_change());
@@ -102,5 +112,28 @@ public class SnowManager : MonoBehaviour
         float X = Random.Range(-8.0f, 9.0f);
         float Y = Random.Range(7.0f, 9.0f);
         Instantiate(Star, new Vector3(X, Y, 0), Quaternion.identity);
+    }
+    private string Score_TextCheck(int score)
+    {
+        if (score >= 150)
+        {
+            evalation_image.sprite = evalation_sprite[0];
+            return "‚©‚Ü‚­‚ç‚ª‚Å‚«‚Ü‚µ‚½";
+        }
+        else if (score >= 100)
+        {
+            evalation_image.sprite = evalation_sprite[1];
+            return "‚ä‚«‚¾‚é‚Ü‚ª‚Å‚«‚Ü‚µ‚½";
+        }
+        else if (score >= 50)
+        {
+            evalation_image.sprite = evalation_sprite[2];
+            return "‚ä‚«‚¤‚³‚¬‚ª‚Å‚«‚Ü‚µ‚½";
+        }
+        else
+        {
+            evalation_image.sprite = evalation_sprite[3];
+            return "‚È‚É‚à‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½";
+        }
     }
 }

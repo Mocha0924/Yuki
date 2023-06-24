@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] int PLAYER_SPEED_MAX;
     public float Player_Speed;
    
     // Update is called once per frame
